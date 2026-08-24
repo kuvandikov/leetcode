@@ -1,10 +1,8 @@
 fun shuffle(nums: IntArray, n: Int): IntArray {
-    val ans = IntArray(nums.size)
-    var cnt = 0
-    for (i in 0 until nums.size step 2) {
-        ans[i] = nums[cnt]
-        ans[i + 1] = nums[n + cnt]
-        cnt++
+    val ans = IntArray(2 * n)
+    for (i in 0 until n) {
+        ans[2 * i] = nums[i]
+        ans[2 * i + 1] = nums[n + i]
     }
     return ans
 }
