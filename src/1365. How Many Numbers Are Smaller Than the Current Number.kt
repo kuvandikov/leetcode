@@ -1,14 +1,23 @@
 fun smallerNumbersThanCurrent(nums: IntArray): IntArray {
+    val count = IntArray(101)
+
+    for (num in nums) {
+        count[num]++
+    }
+
+    for (i in 1..100) {
+        count[i] += count[i - 1]
+    }
+
     val ans = IntArray(nums.size)
     for (i in nums.indices) {
-        var cnt = 0
-        for (j in nums.indices) {
-            if (i != j && nums[i]>nums[j]) {
-                cnt++
-            }
+        if (nums[i] == 0) {
+            ans[i] = 0
+        } else {
+            ans[i] = count[nums[i] - 1]
         }
-        ans[i] = cnt
     }
+
     return ans
 }
 fun main() {
