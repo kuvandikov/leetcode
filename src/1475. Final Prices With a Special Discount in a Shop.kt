@@ -1,14 +1,15 @@
 fun finalPrices(prices: IntArray): IntArray {
-    val ans = IntArray(prices.size)
-    for (i in 0 until prices.size) {
-        ans[i] = prices[i]
-        for (j in i + 1 until prices.size) {
-            if (prices[j] <= prices[i]) {
-                ans[i] = prices[i] - prices[j]
-                break
-            }
+    val ans = prices.clone()
+    val stack = ArrayDeque<Int>()
+
+    for (i in prices.indices) {
+        while (stack.isNotEmpty() && prices[stack.last()] >= prices[i]) {
+            val idx = stack.removeLast()
+            ans[idx] -= prices[i]
         }
+        stack.addLast(i)
     }
+
     return ans
 }
 fun main() {
